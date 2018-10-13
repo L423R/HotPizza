@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"  "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+    <!--Pizza template-->
+    <definition name="pizza_template"
+                template="/WEB-INF/views/tiles/layouts/pizzaLayout.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/tiles/template/pizzaHeader.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/views/tiles/template/pizzaFooter.jsp"/>
+    </definition>
+
+    <definition name="pizzaMain" extends="pizza_template">
+        <put-attribute name="header" value="/WEB-INF/views/tiles/template/pizzaHeader.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/tiles/template/pizzaBody.jsp"/>
+    </definition>
+
+    <definition name="pizzaOrder" extends="pizza_template">
+        <put-attribute name="body" value="/WEB-INF/views/tiles/template/orderBody.jsp"/>
+    </definition>
+
+    <definition name="pizzaPayment" extends="pizza_template">
+        <put-attribute name="body" value="/WEB-INF/views/tiles/template/paymentBody.jsp"/>
+    </definition>
+
+    <definition name="pizzaFinish" extends="pizza_template">
+        <put-attribute name="body" value="/WEB-INF/views/tiles/template/finishBody.jsp"/>
+    </definition>
+   
+</tiles-definitions>

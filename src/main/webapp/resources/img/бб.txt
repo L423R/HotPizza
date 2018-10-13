@@ -1,0 +1,6 @@
+INSERT INTO red_pizza.pizza (name, price_little, img_path, description, price_big) VALUES ('Четыре сыра', 405, '4syra', 'СЫРНАЯ МММММ ПИЗДЕЦ', 715);
+INSERT INTO red_pizza.pizza (name, price_little, img_path, description, price_big) VALUES ('Четыре сезона', 410, '4sezona', 'ХАВАЙ КАЖДЫЙ СЕЗОН ДЕТКА', 715); 
+INSERT INTO red_pizza.pizza (name, price_little, img_path, description, price_big) VALUES ('Чизбургер-пицца', 415, 'chiz_pizza', 'КАК В МАКДАКЕ, ЕБАТЬ АХУЕЕШЬ', 720 );
+INSERT INTO red_pizza.pizza (name, price_little, img_path, description, price_big) VALUES ('Цыплёнок барбекю', 420, 'barbeky', 'БАРБЕКЮ ЖИ ЕСТЬ', 740);
+INSERT INTO red_pizza.pizza (name, price_little, img_path, description, price_big) VALUES ('Маргарита', 415, 'Margarita', 'prosto Margo', 715);
+INSERT INTO red_pizza.pizza (name, price_littlem img_path, description, price_big) VALUES ('Супермясная', 444, 'supa_mega_meat', 'Супермясная', 666);

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:ehcanche="http://www.springframework.org/schema/tool"
+	   xmlns:cache="http://www.springframework.org/schema/cache"
+	   xmlns:security="http://www.springframework.org/schema/security"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+    <context:component-scan base-package="com.zgt.project"/>
+	<cache:annotation-driven />
+    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>-->
+
+    <mvc:annotation-driven />
+
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
+
+	<!--<bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver"/>-->
+
+<!--
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>
+	</security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="root" password="12345" authorities="ROLE_ADMIN" />
+            </security:user-service>
+
+        </security:authentication-provider>
+    </security:authentication-manager>
+-->
+
+	<bean id="emf"
+			class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+		<property name="PersistenceUnitName" value="MyPU"/>
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+	</bean>
+
+	<bean id="jpaVendorAdapter"
+		 class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+			<property name="showSql" value="true" />
+			<property name="generateDdl" value="false" />
+			<property name="databasePlatform" value="org.eclipse.persistence.platform.database.MySQLPlatform" />
+			<property name="database" value="MYSQL"/>
+	</bean>
+	
+	<bean id="transactionManager"
+			class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/views/**/views.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.tiles2.TilesViewResolver"/>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager">
+			<bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+				<property name="configLocation" value="resources/ehcache.xml"/>
+				<property name="shared" value="true"/>
+			</bean>
+		</property>
+	</bean>
+
+
+</beans>
